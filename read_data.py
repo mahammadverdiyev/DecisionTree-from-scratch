@@ -1,5 +1,5 @@
 from patient import Patient
-
+from DecisionTree import DecisionTree
 
 data = []
 
@@ -17,14 +17,8 @@ with open('breast-cancer-wisconsin.data.txt', 'r') as file:
 # for p in data:
 #     print(p)
 
-malignentPatientCount = 0
-benignPatientCount = 0
-
-for p in data:
-    if p.checkUpResult():
-        malignentPatientCount += 1
-    else:
-        benignPatientCount += 1
+malignentPatientCount = sum(1 for p in data if p.checkUpResult() == True)
+benignPatientCount = sum(1 for p in data if p.checkUpResult() == False)
 
 
 print("malignentPatientCount: ", str(malignentPatientCount))
@@ -32,7 +26,7 @@ print("benignPatientCount: ", str(benignPatientCount))
 
 
 # going to split the data into training and test sets where each
-# half of will contain an equal numbeer of cases: benign and malignent patients
+# half of it will contain an equal numbeer of cases: benign and malignent patients
 
 
 # but first we have to sort the data based on the their medical examination result
@@ -61,5 +55,18 @@ training_data = benign_patients[:halfBenignCount] + \
 test_data = benign_patients[halfBenignCount:] + \
     malignant_patients[halfMalignentCount:]
 
-print(len(data))
-print(len(training_data), len(test_data))
+# print(len(data))
+# print(len(training_data), len(test_data))
+tree = DecisionTree()
+
+lows, highs = tree.splitData(data, 2, 4)
+
+malignents_lows = sum(1 for p in lows if p.checkUpResult() == True)
+malignents_highs = sum(1 for p in highs if p.checkUpResult() == True)
+
+benign_lows = sum(1 for p in lows if p.checkUpResult() == False)
+benign_highs = sum(1 for p in highs if p.checkUpResult() == False)
+
+
+# for p in highs:
+#     print(p.patientData[2])
