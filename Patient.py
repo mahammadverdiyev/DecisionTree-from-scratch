@@ -12,7 +12,7 @@ class Patient:
         else:
             self.isMalignent = False
 
-    def result(self):
+    def isMalignent(self):
         return self.isMalignent
 
     def __str__(self):
