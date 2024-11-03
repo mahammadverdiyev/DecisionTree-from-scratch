@@ -1,3 +1,6 @@
+from patient import Patient
+
+
 data = []
 
 with open('breast-cancer-wisconsin.data.txt', 'r') as file:
@@ -7,5 +10,9 @@ with open('breast-cancer-wisconsin.data.txt', 'r') as file:
         line = line.split(',')
         if '?' in line:
             continue
-        curr_data = map(int, line)
-        data.append(curr_data)
+        curr_data = list(map(int, line))
+        data.append(Patient(curr_data))
+
+
+for p in data:
+    print(p)
