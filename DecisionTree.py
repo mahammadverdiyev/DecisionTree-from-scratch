@@ -19,6 +19,21 @@ class DecisionTree:
     def findBestSplitPoint(self, comingData, featureIndex):
         bestSplitPoint = 1
 
+        splittedCounts = self.simulateSplitCounts(
+            comingData, featureIndex, bestSplitPoint)
+
+        bestEntropy = self.calculateEntropy(splittedCounts)
+
+        for i in range(2, 11):
+            splittedCounts = self.simulateSplitCounts(
+                comingData, featureIndex, bestSplitPoint)
+            tempEntropy = self.calculateEntropy(splittedCounts)
+            if tempEntropy < bestEntropy:
+                bestEntropy = tempEntropy
+
+    def calculateEntropy(self, splittedCounts):
+        malignentLowsCount, benignLowsCount, malignentHighsCount, benignHighsCount = splittedCounts
+
     def splitData(self, comingData, featureIndex, threshold):
         if featureIndex >= len(comingData) or featureIndex < 0:
             return None
