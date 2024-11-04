@@ -25,7 +25,7 @@ print("malignentPatientCount: ", str(malignentPatientCount))
 print("benignPatientCount: ", str(benignPatientCount))
 
 
-# going to split the data into training and test sets where each
+# I'm going to split the data into training and test sets where each
 # half of it will contain an equal numbeer of cases: benign and malignent patients
 
 
@@ -61,12 +61,11 @@ tree = DecisionTree()
 
 lows, highs = tree.splitData(data, 2, 4)
 
-malignents_lows = sum(1 for p in lows if p.checkUpResult() == True)
-malignents_highs = sum(1 for p in highs if p.checkUpResult() == True)
+malignent_lows = tree.countData(lows, True)
+malignents_highs = tree.countData(highs, True)
 
-benign_lows = sum(1 for p in lows if p.checkUpResult() == False)
-benign_highs = sum(1 for p in highs if p.checkUpResult() == False)
-
+benign_lows = tree.countData(lows, False)
+benign_highs = tree.countData(highs, False)
 
 # for p in highs:
 #     print(p.patientData[2])
