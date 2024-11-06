@@ -118,7 +118,6 @@ class DecisionTree:
         highs_sum = malignentHighsCount + benignHighsCount
 
         if lows_sum == 0 or highs_sum == 0:
-            # Return a large value to indicate an invalid split
             return float('inf')
 
         lows_malignent_ratio = malignentLowsCount / lows_sum
