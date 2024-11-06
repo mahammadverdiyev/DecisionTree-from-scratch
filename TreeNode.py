@@ -1,11 +1,23 @@
+from typing import List
+
+
 class TreeNode:
     patientDataIndex = None
-    plitPoint = None
+    splitPoint = None
 
     dataList = []
 
     lows = []
     highs = []
 
-    def __init__(self, data) -> None:
+    usableFeatureIndices = []
+    isMalignent = None
+
+    def __init__(self, data, incomingUsableFeatureIndices: List[bool]) -> None:
         self.dataList = data
+        incomingUsableFeatureIndices
+        self.usableFeatureIndices = incomingUsableFeatureIndices.copy()
+        self.splitPoint = -1
+        self.patientDataIndex = -1
+
+        self.isMalignent = False

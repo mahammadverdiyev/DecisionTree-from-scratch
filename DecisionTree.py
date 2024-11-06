@@ -2,36 +2,41 @@ from TreeNode import TreeNode
 
 
 class DecisionTree:
-    rootNode = None
-
-    usableFeatureIndices = []
+    rootNode: TreeNode
 
     def __init__(self, comingData) -> None:
-        self.rootNode = TreeNode(comingData)
-
         usableFeatureIndices = [True] * 10
 
         usableFeatureIndices[0] = False
 
-    def process(self):
+        self.rootNode = TreeNode(comingData, usableFeatureIndices)
+
+    def fit(self):
+        self.fit_start(self.rootNode)
+        self.determine_leaf_classes(self.rootNode)
+
+    def fit_start(currentNode: TreeNode):
         pass
 
-    def findBestSplitPoint(self, comingData, featureIndex):
+    def determine_leaf_classes(currentNode: TreeNode):
+        pass
+
+    def find_best_split_point(self, comingData, featureIndex):
         bestSplitPoint = 1
 
         splittedCounts = self.simulateSplitCounts(
             comingData, featureIndex, bestSplitPoint)
 
-        bestEntropy = self.calculateEntropy(splittedCounts)
+        bestEntropy = self.calculate_entropy(splittedCounts)
 
         for i in range(2, 11):
             splittedCounts = self.simulateSplitCounts(
                 comingData, featureIndex, bestSplitPoint)
-            tempEntropy = self.calculateEntropy(splittedCounts)
+            tempEntropy = self.calculate_entropy(splittedCounts)
             if tempEntropy < bestEntropy:
                 bestEntropy = tempEntropy
 
-    def calculateEntropy(self, splittedCounts):
+    def calculate_entropy(self, splittedCounts):
         malignentLowsCount, benignLowsCount, malignentHighsCount, benignHighsCount = splittedCounts
 
     def splitData(self, comingData, featureIndex, threshold):
