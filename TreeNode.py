@@ -7,8 +7,8 @@ class TreeNode:
 
     dataList = []
 
-    lows = []
-    highs = []
+    lows_node = None
+    highs_node = None
 
     usableFeatureIndices = []
     isMalignent = None
